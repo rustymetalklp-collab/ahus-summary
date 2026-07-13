@@ -19,9 +19,9 @@
     --faint:#8a8c84;
     --line:#e4e4de;
     --line-soft:#eeeeea;
-    --accent:#1e4636;
-    --accent-2:#2f6b52;
-    --accent-tint:#e9efe9;
+    --accent:#2b2d31;
+    --accent-2:#4c4f56;
+    --accent-tint:#ececee;
     --blue:#33589e;
     --blue-tint:#e9eff9;
     --warn:#946225;
@@ -63,6 +63,7 @@
     width:30px;height:30px;border-radius:8px;background:var(--accent);color:#f2f6f1;
     display:grid;place-items:center;font-family:var(--display);font-weight:700;font-size:15px;
   }
+  .brand .mark svg{width:18px;height:18px;}
   .brand b{font-family:var(--display);font-weight:700;font-size:17px;letter-spacing:-0.01em;}
   .brand span{color:var(--faint);font-size:13px;margin-left:2px;}
   .topbar .spacer{flex:1;}
@@ -97,13 +98,22 @@
     color:var(--faint);margin:0 0 8px;padding:0 10px;
   }
   .nav-group a,.nav-group .soon{
-    display:flex;align-items:center;gap:8px;justify-content:space-between;
+    display:flex;align-items:center;gap:8px;
     padding:8px 10px;border-radius:9px;text-decoration:none;font-size:14.5px;
-    color:var(--muted);line-height:1.35;transition:background .18s,color .18s;
+    line-height:1.35;transition:background .18s,color .18s;
   }
-  .nav-group a:hover{background:var(--line-soft);color:var(--ink);}
-  .nav-group a.active{background:var(--accent);color:#eef4ee;font-weight:600;}
-  .nav-group .soon{color:var(--faint);cursor:default;}
+  .nav-group a{color:var(--accent);font-weight:600;cursor:pointer;}
+  .nav-group a:not(.active)::after{content:"›";margin-left:auto;color:var(--accent-2);
+    font-size:17px;line-height:1;opacity:.5;transition:transform .16s,opacity .16s;}
+  .nav-group a:not(.active):hover{background:var(--accent-tint);}
+  .nav-group a:not(.active):hover::after{opacity:1;transform:translateX(2px);}
+  .nav-group a.is-new::after{content:none;}
+  .nav-group a.active{background:var(--accent);color:#eef4ee;cursor:default;}
+  .nav-group .soon{color:var(--faint);cursor:default;justify-content:space-between;}
+  .pill-new{margin-left:auto;font-size:9.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+    color:#fff;background:var(--accent);padding:2px 7px;border-radius:20px;position:relative;}
+  .pill-new::after{content:"";position:absolute;inset:0;border-radius:20px;animation:navpulse 1.9s ease-out infinite;}
+  @keyframes navpulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--accent) 55%,transparent);}70%,100%{box-shadow:0 0 0 7px transparent;}}
   .nav-group .soon .badge{
     font-size:10px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;
     color:var(--faint);background:var(--line-soft);padding:2px 7px;border-radius:20px;flex:none;
@@ -293,6 +303,7 @@
     .reveal{opacity:1;transform:none;transition:none;}
     .sidebar{transition:none;}
     .acc>summary .chev{transition:none;}
+    .pill-new::after{animation:none;}
   }
 </style>
 </head>
@@ -301,7 +312,7 @@
 <header class="topbar">
   <div class="topbar-inner">
     <button class="hamburger" id="navToggle" aria-label="Меню разделов"><span></span></button>
-    <a class="brand" href="#top"><span class="mark">A</span><b>Ahus</b><span>· проект сайта</span></a>
+    <a class="brand" href="#top"><span class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.3 12 4l9 7.3"/><path d="M5.5 9.7V20h13V9.7"/><path d="M10 20v-5.2h4V20"/></svg></span><b>Ahus</b><span>· проект сайта</span></a>
     <div class="spacer"></div>
     <div class="status">Фаза 1 · исследование рынка</div>
   </div>
